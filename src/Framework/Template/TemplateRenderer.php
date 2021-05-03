@@ -1,8 +1,28 @@
 <?php
 
+
 namespace Framework\Template;
 
-interface TemplateRenderer
+
+class TemplateRenderer
 {
-    public function render($name, array $params = []): string;
+    private $path;
+
+    public function __construct($path)
+    {
+        $this->path = $path;
+    }
+
+    /**
+     * @return false|mixed|string
+     */
+    public function render($view, array $params = []): string
+    {
+        $templateFile = $this->path . '/' . $view . '.php';
+
+        ob_start();
+        extract($params, EXTR_OVERWRITE);
+        require $templateFile;
+        return ob_get_clean();
+    }
 }

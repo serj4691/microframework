@@ -6,6 +6,7 @@ use Framework\Http\Application;
 use Framework\Http\Pipeline\MiddlewareResolver;
 use Framework\Http\Router\AuraRouterAdapter;
 use Framework\Http\Router\Router;
+use Framework\Template\TemplateRenderer;
 use Laminas\Diactoros\Response;
 use Psr\Container\ContainerInterface;
 
@@ -31,6 +32,9 @@ return [
             },
             ErrorHandleMiddleware::class => function (ContainerInterface $container) {
                 return new ErrorHandleMiddleware($container->get('config')['debug']);
+            },
+            TemplateRenderer::class =>function () {
+                return new TemplateRenderer('templates');
             },
         ],
     ],
