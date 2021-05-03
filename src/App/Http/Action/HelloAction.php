@@ -2,6 +2,7 @@
 
 namespace App\Http\Action;
 
+use Laminas\Diactoros\Response\HtmlResponse;
 use Psr\Http\Message\ServerRequestInterface;
 use Framework\Template\TemplateRenderer;
 use Psr\Http\Message\ResponseInterface;
@@ -16,27 +17,27 @@ class HelloAction
         $this->template = $template;
     }
 
-    public function __invoke(ServerRequestInterface $request): ResponseInterface
+    //public function __invoke(ServerRequestInterface $request): ResponseInterface
     //public function hand(ServerRequestInterface $request): ResponseInterface
+    public function __invoke()
     {
         //$this->template = $template;
-        $name = $request->getQueryParams()['name'] ?? 'Guest';
+        //$name = $request->getQueryParams()['name'] ?? 'Guest';
         //return new HtmlResponse('Hello, ' . htmlspecialchars($name, ENT_QUOTES || ENT_SUBSTITUTE) . '!');
 
 //        $html = $this->render($name);
 //        return  new \Laminas\Diactoros\Response\HtmlResponse($html);
-        return  new \Laminas\Diactoros\Response\HtmlResponse($this->template->render('hello', [
-            'name' => $name,
-        ]));
+//        return  new HtmlResponse($this->template->render('hello', [
+//            'name' => $name,
+//        ]));
+        return  new HtmlResponse($this->template->render('app/hello'));
     }
     // public function process(ServerRequestInterface $request): ResponseInterface
     // {
     //     $name = $request->getQueryParams()['name'] ?? 'Guest';
     //     return new HtmlResponse('Hello, ' . $name . '!');
     // }
-    /**
-     * @return false|mixed|string
-     */
+
 //    private function render($view, array $params = []): string
 //    {
 ////        foreach ($params as $param => $value) {
