@@ -34,8 +34,8 @@ return [
             ErrorHandleMiddleware::class => function (ContainerInterface $container) {
                 return new ErrorHandleMiddleware($container->get('config')['debug']);
             },
-            TemplateRenderer::class =>function () {
-                return new PhpRenderer('templates');
+            TemplateRenderer::class =>function (ContainerInterface $container) {
+                return new PhpRenderer('templates', $container->get(Router::class));
             },
         ],
     ],
